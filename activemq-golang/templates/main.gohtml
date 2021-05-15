@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MQ Hello World</title>
+</head>
+<body>
+    <h1>MQ Hello World</h1>
+    <form method="post">
+        <label>Message:</label>
+        <input type="text" name="message" id="message"/>
+        <input type="submit"/>
+    </form>
+
+    <h2>Published values:</h2>
+    {{range $value := .}}
+    <li>{{$value}}</li>
+    {{end}}
+</body>
+</html>

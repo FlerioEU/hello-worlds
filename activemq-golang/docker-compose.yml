@@ -1,0 +1,13 @@
+version: "3.9"
+services: 
+    activemq: 
+        image: rmohr/activemq
+        container_name: activemq
+        environment: 
+            - "TZ=Europe/Amsterdam"
+        volumes: 
+            - "./activemq/activemq.xml:/conf/activemq.xml"
+        ports:
+            - "61616:61616"
+            - "8161:8161"
+            - "61613:61613"
