@@ -5,9 +5,16 @@ services:
         container_name: activemq
         environment: 
             - "TZ=Europe/Amsterdam"
-        volumes: 
-            - "./activemq/activemq.xml:/conf/activemq.xml"
         ports:
             - "61616:61616"
             - "8161:8161"
-            - "61613:61613"
+    myapp:
+        build: . 
+        container_name: mq-talker
+        environment: 
+            - "STOMPHOST=activemq"
+        ports: 
+            - "8080:8080"
+        depends_on: 
+            - activemq
+        restart: always
