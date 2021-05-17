@@ -1,5 +1,5 @@
 # AMQP World
-This is a quick hello world project which aims to have a [AMQP](https://www.amqp.org/) sender/receiver golang services which communicates with RabbitMQ. Sadly the [used module](github.com/streadway/amqp) does not support AMQP 1.0 which is required for ActiveMQ
+This is a quick hello world project which aims to have a [AMQP](https://www.amqp.org/) sender/receiver golang services which communicates with RabbitMQ. Sadly the [used module](https://github.com/streadway/amqp) does not support AMQP 1.0 which is required for ActiveMQ
 
 The sender service will publish a message every three seconds to the configured broker. The receiver service subscribes to a channel that the sender service publishes too and logs the message.
 
