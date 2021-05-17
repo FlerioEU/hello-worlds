@@ -1,0 +1,29 @@
+version: "3.9"
+services: 
+    broker: 
+        image: rabbitmq:3.8.16-management-alpine
+        container_name: broker
+        ports:
+            - "15672:15672"
+    sender:
+        build: 
+            context: sender
+        command: sh -c '/wait-for broker:5672 -- /app/main'
+        image: amqp-sender:latest
+        environment: 
+            - "AMQP_URL=amqp://guest:guest@broker:5672/"
+            - "AMQP_QUEUE=/amqp/messages"
+        depends_on: 
+            - broker
+        restart: always
+    receiver:
+        build:
+            context: receiver
+        command: sh -c '/wait-for broker:5672 -- /app/main'
+        image: amqp-receiver:latest
+        environment: 
+            - "AMQP_URL=amqp://guest:guest@broker:5672/"
+            - "AMQP_QUEUE=/amqp/messages"
+        depends_on: 
+            - broker
+        restart: always
