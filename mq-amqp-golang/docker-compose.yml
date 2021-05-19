@@ -17,8 +17,7 @@ services:
             - broker
         restart: always
     receiver:
-        build:
-            context: receiver
+        build: .
         command: sh -c '/wait-for broker:5672 -- /app/main'
         image: amqp-receiver:latest
         environment: 
