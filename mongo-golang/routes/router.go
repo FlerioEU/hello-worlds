@@ -8,20 +8,20 @@ import (
 )
 
 type Routes struct {
-	router *gin.Engine
+	Router *gin.Engine
 }
 
 func New(db db.Database) Routes {
 	r := Routes{
-		router: gin.Default(),
+		Router: gin.Default(),
 	}
 
-	api := r.router.Group("/api/v1")
+	api := r.Router.Group("/api/v1")
 	// fe := r.router.Group("/")
 
 	r.registerBooks(api, *db.DB)
 
-	routes := r.router.Routes()
+	routes := r.Router.Routes()
 
 	log.Println("Endpoints:  ")
 	for _, route := range routes {
@@ -33,5 +33,5 @@ func New(db db.Database) Routes {
 
 func (r Routes) Run(addr string) {
 	log.Printf("Listening on port %v", addr)
-	r.router.Run(addr)
+	r.Router.Run(addr)
 }

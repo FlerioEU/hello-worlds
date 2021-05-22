@@ -14,15 +14,15 @@ import (
 )
 
 type book struct {
-	Id     primitive.ObjectID `bson:"_id,omitempty"`
-	Title  string             `bson:"title,omitempty"`
-	Author string             `bson:"author,omitempty"`
+	Id     string `bson:"_id,omitempty"`
+	Title  string `bson:"title,omitempty"`
+	Author string `bson:"author,omitempty"`
 }
 
 func (r Routes) registerBooks(rg *gin.RouterGroup, db mongo.Database) {
 	books := rg.Group("/books")
 
-	books.POST("/", postBooks(db))
+	books.POST("", postBooks(db))
 	books.GET("/:id", getBook(db))
 }
 
