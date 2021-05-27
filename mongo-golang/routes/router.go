@@ -17,7 +17,6 @@ func New(db db.Database) Routes {
 	}
 
 	api := r.Router.Group("/api/v1")
-	// fe := r.router.Group("/")
 
 	r.registerBooks(api, *db.DB)
 
