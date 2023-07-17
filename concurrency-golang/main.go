@@ -10,11 +10,6 @@ import (
 )
 
 var numbers = []int{1, 4, 7}
-
-// used to lock the seed for random integers
-// so rand.New(s) does not create the same number in each goroutine
-// rand.NewSource() is NOT threadsafe
-var mu sync.Mutex
 var seed = rand.NewSource(time.Now().Unix())
 
 func main() {
@@ -27,11 +22,7 @@ func main() {
 		go func(v int) {
 			defer wg.Done()
 
-			// lock the seed so we are not using the same seed value
-			// in each goroutine
-			mu.Lock()
 			s := seed
-			mu.Unlock()
 
 			v = v + rand.New(s).Intn(100)
 			queue <- v
